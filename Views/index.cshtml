@@ -1,0 +1,40 @@
+@Html.Partial("header.cshtml")
+<h1>Manage Workers/Chores</h1>
+<div class="chores">
+  <h3>Chores:</h3>
+  @foreach(var item in @Model["jobs"])
+  {
+    <div class="chore" data-id="@item.GetId()">@item.GetName()</div>
+  }
+</div>
+
+<div class="workers">
+  <h3>Workers:</h3>
+  @foreach(var item in @Model["workers"])
+  {
+    <div class="worker" data-id="@item.GetId()">
+      <h4>@item.GetName()</h4>
+      @foreach(var chore in @item.GetJobs())
+      {
+        <div>
+          -- @chore.GetName()
+        </div>
+      }
+    </div>
+  }
+</div>
+
+<div class="choresForm">
+  <form action="/addChore" method="post">
+    <label for="name">Add Chore:</label><input type="text" name="name" value="">
+    <input type="submit" name="submit" value="Add Chore">
+  </form>
+</div>
+
+
+<div class="workersForm">
+  <form action="/addWorker" method="post">
+    <label for="name">Add Worker:</label><input type="text" name="name" value="">
+    <input type="submit" name="submit" value="Add Chore">
+  </form>
+</div>

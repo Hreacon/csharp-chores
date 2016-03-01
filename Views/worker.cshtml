@@ -1,0 +1,28 @@
+@Html.Partial("header.cshtml")
+
+<h1>@Model.GetName()</h1>
+
+<ul>
+  @foreach(var job in @Model.GetJobs())
+  {
+    <li>
+      @job.GetName()
+      <ul>
+        @foreach(var worker in @job.GetWorkers())
+        {
+          @if(worker.GetName() != @Model.GetName())
+          {
+            <li>@worker.GetName()</li>
+          }
+        }
+      </ul>
+    </li>
+  }
+</ul>
+
+<div class="choresForm">
+  <form action="/worker/@Model.GetId()/addChore" method="post">
+    <label for="name">Add Chore:</label><input type="text" name="name" value="">
+    <input type="submit" name="submit" value="Add Chore">
+  </form>
+</div>
